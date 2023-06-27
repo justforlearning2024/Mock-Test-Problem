@@ -1,0 +1,112 @@
+# Mock-Test-Problem
+// Java
+  
+  // Problem - 01
+  // Problem Statement - Move Zeroes
+  // Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+  // First Method 
+  public class Main {
+    public static void main(String args[]){
+        int[] nums = {0, 0, 1, 0, 3, 0, 12};
+        for (int i : nums) {
+            System.out.print(i + " ");
+        }
+        nums = move_zeroes(nums);
+        System.out.println();    
+        for (int i : nums) {
+            System.out.print(i + " ");
+        }   
+    }
+  
+    public static int[] move_zeroes(int[] nums) {
+        if(nums.length == 1) {
+            return nums;
+        }
+        int i = 0;
+        while(nums[i] != 0) {
+            i++;
+        }
+        int j = i+1;
+        while(j < nums.length) {
+            if(nums[j] != 0) {
+                nums[i] = nums[j];
+                nums[j] = 0;
+                i++;
+                j++;
+            } else {
+                j++;
+            }
+        }
+        return nums;
+    }
+}
+  
+
+// Second Method
+public class Main {
+    public static void main(String args[]){
+        int[] nums = {0, 0, 1, 0, 3, 0, 12, 0, 0, 5, 0, 3};
+        for (int i : nums) {
+            System.out.print(i + " ");
+        }
+        nums = move_zeroes(nums);
+        System.out.println();    
+        for (int i : nums) {
+            System.out.print(i + " ");
+        }   
+    }
+
+    public static int[] move_zeroes(int[] nums) {
+        if(nums.length == 1) {
+            return nums;
+        }
+        int count_zeros = 0;
+        int index = 0;
+        int[] arr = new int[nums.length];
+        for(int i = 0; i < nums.length; i++) {
+            if(nums[i] == 0) {
+                count_zeros++;
+            } else {
+                arr[index] = nums[i];
+                index++;
+            }
+        }
+        while(count_zeros > 0) {
+            arr[index] = 0;
+            index++;
+            count_zeros--;
+        }
+        return arr;
+    }
+}
+
+
+// Problem - 02
+// Problem Statement - First Unique Character in a String
+// Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+
+public class Main{
+    public static int first_unique_Character(String str) {
+        int index = 0;
+        int[] arr = new int[26];
+        for(int i = 0; i < str.length(); i++) {
+            index = str.charAt(i) - 'a';
+            arr[index]++;
+        }
+        for(int i = 0; i < str.length(); i++) {
+            index = str.charAt(i) - 'a';
+            if(arr[index] == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        String str = "loveleetcode";
+        int ans = first_unique_Character(str);
+        System.out.println(ans);
+    }
+}
+  
